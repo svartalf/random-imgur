@@ -9,7 +9,7 @@ import settings
 class Main(object):
 
     def __init__(self):
-        self.jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
+        jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(settings.TEMPLATE_PATH))
         self.template = jinja_env.get_template('index.html')
 
         self.redis = redis.StrictRedis(db=settings.REDIS_DATABASE)
@@ -31,3 +31,5 @@ class Main(object):
 
 if __name__ == '__main__':
     cherrypy.quickstart(Main())
+else:
+    application = cherrypy.Application(Main(), '')
