@@ -1,1 +1,3 @@
 Random imgur images viewer. Based on the redis + cherrypy.
+
+You can check demo on the http://imgur.svartalf.info
