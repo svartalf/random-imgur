@@ -25,13 +25,17 @@
                 var container = $('#image-container');
                 var loader = $('h1').find('small');
 
+                image.bind('load', function() {
+                    loader.removeClass('loading');
+                });
+
                 function update(event) {
                     event.preventDefault();
                     loader.addClass('loading');
                     $.getJSON('/random/', function(response) {
                         container.attr('href', response.url);
                         image.attr('src', response.image);
-                        loader.removeClass('loading');
+                        _gaq.push(['_trackEvent', 'images', 'random', response.image]);
                     });
                 }
                 container.bind('click', update);
@@ -59,16 +63,22 @@
                     background.hide();
                     var date = new Date();
                     date.setYear(date.getYear()+1);
-                    document.cookie = [
-                        'imgur_show=all the things!',
-                        'expires='+date.toUTCString(),
-                        'path=/',
-                        'domain='
-                    ].join(';');
+                    document.cookie = ['imgur_show=all the things!', 'expires='+date.toUTCString(), 'path=/', 'domain='].join(';');
                 });
             })();
 
         });
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-4710084-12']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
     </script>
 </head>
 <body>
