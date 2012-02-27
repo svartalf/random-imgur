@@ -3,6 +3,7 @@
 import cherrypy
 import jinja2
 import redis
+import json
 
 import settings
 
@@ -16,20 +17,25 @@ class Main(object):
 
     @cherrypy.expose
     def index(self):
-        key = None
-        # TODO: if there really no images with 200 code, break cycle
-        while 1:
-            key = self.redis.randomkey()
-            if not key:
-                break
+        image = self.redis.srandmember('imgur.200')
 
-            value = self.redis.get(key)
-            if value == '200':
-                break
+        context = {
+            'image': image.replace('.jpg', 'l.jpg'),
+            'url': image.replace('.jpg', '').replace('i.', ''),
+        }
 
-        return self.template.render(image=key.replace('.jpg', 'l.jpg'), url=key.replace('.jpg', '').replace('i.', ''))
+        return self.template.render(context)
+
+    @cherrypy.expose
+    def random(self):
+        image = self.redis.srandmember('imgur.200')
+
+        return json.dumps({
+            'image': image.replace('.jpg', 'l.jpg'),
+            'url': image.replace('.jpg', '').replace('i.', ''),
+        })
 
 if __name__ == '__main__':
     cherrypy.quickstart(Main())
 else:
-    application = cherrypy.Application(Main(), '')
+    application = cherrypy.Application(Main())

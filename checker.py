@@ -29,14 +29,18 @@ class ImageChecker(object):
             url = 'http://i.imgur.com/%s.jpg' % code
             response = requests.head(url)
 
+            # We don't need no more any links for this url
+            self.redis.srem('imgur.404', url)
+            self.redis.srem('imgur.200', url)
+
             # Because imgur does'nt sends 404 for not-existent image, check for 404 image
             if response.headers['content-length'] == '669' and response.headers['content-type'] == 'image/gif':
                 # TODO: maybe we should check image content?
                 logging.debug('%s: 404' % url)
-                self.redis.set(url, 404)
+                self.redis.sadd('imgur.404', url)
             else:
                 logging.debug('%s: 200' % url)
-                self.redis.set(url, 200)
+                self.redis.sadd('imgur.200', url)
 
             time.sleep(settings.CHECKER_INTERVAL)
 
