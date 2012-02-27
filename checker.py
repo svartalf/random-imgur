@@ -10,6 +10,12 @@ import logging
 import settings
 import helpers
 
+CONTENT_TYPE_EXTENSIONS = {
+    'image/jpeg': 'jpg',
+    'image/gif': 'gif',
+    'image/png': 'png',
+}
+
 class ImageChecker(object):
 
     def __init__(self):
@@ -39,6 +45,7 @@ class ImageChecker(object):
                 logging.debug('%s: 404' % url)
                 self.redis.sadd('imgur.404', url)
             else:
+                url = url.replace('.jpg', '.%s' % CONTENT_TYPE_EXTENSIONS[response.headers['content-type']])
                 logging.debug('%s: 200' % url)
                 self.redis.sadd('imgur.200', url)
 
