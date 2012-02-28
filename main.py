@@ -23,6 +23,8 @@ class Main(object):
             'image': image.replace('.jpg', 'l.jpg'),
             'url': image.replace('.jpg', '').replace('i.', ''),
             'amount': self.redis.scard('imgur.200'),
+            'ga_account': settings.GOOGLE_ANALYTICS_ACCOUNT,
+            'facebook_account': settings.FACEBOOK_ACCOUNT,
         }
 
         return self.template.render(context)

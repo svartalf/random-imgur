@@ -3,82 +3,23 @@
 <head>
     <title>Random imgur image</title>
     <meta charset="utf-8">
-    <style type="text/css">
-        * {margin:0;padding:0;}
-        body {width:640px;margin: 30px auto;font-family: HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;text-rendering: optimizelegibility;}
-        h1 {color:#333;font-weight:bold;}
-        h1 small {font-size:0.4em;color:#999;padding-right:24px;}
-        h1 small.loading {background: no-repeat right center url(data:image/gif;base64,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);}
-        article {padding:30px 0;text-align:center;}
-        footer {font-size: 0.6em;color:#666;}
-        #warning{display:none;z-index:11;position:absolute;background-color:#fff;border-radius:5px;padding:20px 30px;}
-        #warning p {margin: 10px 0;}
-        #warning button {padding:3px 7px;}
-        #warning-bg{display:none;background-color:#000;z-index:10;position:absolute;top:0;left:0;width:100%;height:100%;}
-    </style>
-    <script type="text/javascript" src="/media/js/zepto.min.js"></script>
+    <link rel="stylesheet" href="/media/css/styles.css" type="text/css">
+    <script type="text/javascript" src="/media/js/yepnope.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-
-            (function() {
-                var image = $('#image');
-                var container = $('#image-container');
-                var loader = $('h1').find('small');
-
-                image.bind('load', function() {
-                    loader.removeClass('loading');
-                });
-
-                function update(event) {
-                    event.preventDefault();
-                    loader.addClass('loading');
-                    $.getJSON('/random/', function(response) {
-                        container.attr('href', response.url);
-                        image.attr('src', response.image);
-                        _gaq.push(['_trackEvent', 'images', 'random', response.image]);
-                    });
-                }
-                container.bind('click', update);
-            })();
-
-            // Check for NSFW cookie
-            (function() {
-                var cookies = document.cookie.split('; ');
-                for (var i=0, cookie; cookie = cookies[i] && cookies[i].split('='); i++) {
-                    if (cookie[0] == 'imgur_show') {
-                        return;
-                    }
-                }
-                // Cookie doesnt exists, showing a warning
-                var message = $('#warning');
-                var background = $('#warning-bg');
-                background.css('width', $(document).width());
-                background.css('height', $(window).height());
-                message.show();
-                background.show();
-                message.css('left', ($(document).width()/2)-message.width()/2);
-                message.css('top', $(window).height()/2-message.height()/2);
-                message.find('button').bind('click', function() {
-                    message.hide();
-                    background.hide();
-                    var date = new Date();
-                    date.setYear(date.getYear()+1);
-                    document.cookie = ['imgur_show=all the things!', 'expires='+date.toUTCString(), 'path=/', 'domain='].join(';');
-                });
-            })();
-
+        yepnope.injectJs('/media/js/zepto.min.js');
+        yepnope.injectJs('/media/js/main.js', function() {});
+        {% if ga_account %}
+        yepnope.injectJs('http://www.google-analytics.com/ga.js', function() {
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', '{{ ga_account }}']);
+            _gaq.push(['_trackPageview']);
         });
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-4710084-12']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
+        {% endif %}
+        yepnope.injectJs('//platform.twitter.com/widgets.js', null, {id: 'twitter-wjs'});
+        yepnope.injectJs('https://apis.google.com/js/plusone.js');
+        {% if facebook_account %}
+        yepnope.injectJs('//connect.facebook.net/ru_RU/all.js#xfbml=1&appId={{ facebook_account }}', null, {id: 'facebook-jssdk'});
+        {% endif %}
     </script>
 </head>
 <body>
@@ -86,7 +27,6 @@
         <h1>
             Random imgur image
             <small>Want more? Refresh a page!</small>
-
         </h1>
     </header>
 
@@ -95,9 +35,22 @@
     </article>
 
     <footer>
+        <p>
         This site are absolutely does not belongs to <a href="http://imgur.com">imgur.com</a>, but all images are hosted on it.
         <a href="https://github.com/svartalf/random-imgur">Source code</a>.
         {{ amount }} images.
+        </p>
+        <ul id="social-buttons">
+            <li>
+                <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+            </li>
+            <li>
+                <div id="fb-root"></div><div class="fb-like" data-width="200"></div>
+            </li>
+            <li>
+                <div class="g-plusone" data-size="small" data-annotation="inline"></div>
+            </li>
+        </div>
     </footer>
 
     <div id="warning">
