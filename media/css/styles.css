@@ -12,4 +12,7 @@ footer {font-size: 0.6em;color:#666;}
 #social-buttons {list-style:none;margin-top:24px;margin-bottom:30px;}
 #social-buttons li {float: left;width:240px;}
 #social-buttons li:first-child {width:100px; margin-left:20px;}
-#social-buttons li:last-child {width: 150px;;}
+#social-buttons li:last-child {width: 150px;}
+
+#images-list li {list-style: none;float: left; text-align: center;width:160px;height:160px;overflow: hidden;}
+#images-list img {max-width:160px;max-height: 160px;}

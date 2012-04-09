@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random imgur image</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/media/css/styles.css" type="text/css">
+    <script type="text/javascript" src="/media/js/yepnope.js"></script>
+    <script type="text/javascript">
+        yepnope.injectJs('/media/js/zepto.min.js');
+        yepnope.injectJs('/media/js/main.js', function() {});
+        {% if ga_account %}
+            yepnope.injectJs('http://www.google-analytics.com/ga.js', function() {
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', '{{ ga_account }}']);
+                _gaq.push(['_trackPageview']);
+            });
+        {% endif %}
+    </script>
+</head>
+<body>
+<header>
+    <h1>
+        Random imgur image
+        <small>Want more? Refresh a page!</small>
+    </h1>
+</header>
+
+<article>
+    <ul id="images-list">
+        {% for image in images %}
+            <li>
+                <a href="{{ image.url }}">
+                    <img src="{{ image.image }}" alt="">
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</article>
+
+<footer>
+    <p>
+        This site are absolutely does not belongs to <a href="http://imgur.com">imgur.com</a>, but all images are hosted on it.
+        <a href="https://github.com/svartalf/random-imgur">Source code</a>.
+        {{ amount }} images.
+    </p>
+    <ul id="social-buttons">
+        <li>
+            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+        </li>
+        <li>
+            <div id="fb-root"></div><div class="fb-like" data-width="200"></div>
+        </li>
+        <li>
+            <div class="g-plusone" data-size="small" data-annotation="inline"></div>
+        </li>
+    </ul>
+</footer>
+
+<div id="warning">
+    <h2>Warning!</h2>
+    <p>You can see a not suitable for school or work content! Continue only if you are 18+ years old.</p>
+    <button>Ok, continue</button>
+</div>
+<div id="warning-bg"></div>
+
+</body>
+</html>

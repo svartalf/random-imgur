@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import string
 
 import cherrypy
 import jinja2
@@ -12,6 +13,7 @@ class Main(object):
     def __init__(self):
         jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(settings.TEMPLATE_PATH))
         self.template = jinja_env.get_template('index.html')
+        self.images_template = jinja_env.get_template('images.html')
 
         self.redis = redis.StrictRedis(db=settings.REDIS_DATABASE)
 
@@ -37,6 +39,21 @@ class Main(object):
             'image': image.replace('.jpg', 'l.jpg'),
             'url': image.replace('.jpg', '').replace('i.', ''),
         })
+
+    @cherrypy.expose
+    def images(self):
+        images = []
+        for image in [self.redis.srandmember('imgur.200') for _ in range(40)]:
+            images.append({
+                'image': image.replace('.jpg', 'm.jpg'),
+                'url': image.replace('.jpg', '').replace('i.', ''),
+            })
+
+        return self.images_template.render({'images': images})
+
+    @cherrypy.expose
+    def images_more(self):
+        return
 
 if __name__ == '__main__':
     cherrypy.quickstart(Main())
